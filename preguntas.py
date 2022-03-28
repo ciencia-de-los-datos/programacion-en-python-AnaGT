@@ -12,17 +12,13 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 import csv
+from collections import Counter
 with open("data.csv", newline="") as BD:
     datos = csv.reader(BD, delimiter="\t")
     tabla = list(datos)
 
 
 def pregunta_01():
-    
-    suma = 0
-    for num in tabla:
-        suma= int(num[1])
-    return suma
     """
     Retorne la suma de la segunda columna.
 
@@ -30,7 +26,10 @@ def pregunta_01():
     214
 
     """
-    return
+    suma = 0
+    for num in tabla:
+        suma += int(num[1])
+    return suma
 
 
 def pregunta_02():
@@ -48,7 +47,10 @@ def pregunta_02():
     ]
 
     """
-    return
+    lista_letras=[z[0] for z in tabla[0:]]
+    lista2 = Counter(lista_letras).most_common(5)
+    
+    return sorted(lista2, reverse= False)
 
 
 def pregunta_03():
