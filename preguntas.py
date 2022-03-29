@@ -13,6 +13,8 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 import csv
 from collections import Counter
+from datetime import datetime, date, timedelta
+import time
 with open("data.csv", newline="") as BD:
     datos = csv.reader(BD, delimiter="\t")
     tabla = list(datos)
@@ -52,9 +54,23 @@ def pregunta_02():
     
     return sorted(lista2, reverse= False)
 
-
 def pregunta_03():
-    """
+  diccionario = {}
+  diccionario = {"A": 0, "B": 0, "C": 0,"D": 0, "E": 0}
+  for row in tabla:
+    sumatoria= row[1]
+    if row[0]== "A":
+      diccionario["A"]+= int(sumatoria)
+    if row[0]== "B":
+      diccionario["B"]+= int(sumatoria)
+    if row[0]== "C":
+      diccionario["C"]+= int(sumatoria)
+    if row[0]== "D":
+      diccionario["D"]+= int(sumatoria)
+    if row[0]== "E":
+      diccionario["E"]+= int(sumatoria)
+  return list(diccionario.items()) 
+"""
     Retorne la suma de la columna 2 por cada letra de la primera columna como una lista
     de tuplas (letra, suma) ordendas alfabeticamente.
 
@@ -67,10 +83,7 @@ def pregunta_03():
         ("E", 67),
     ]
 
-    """
-    return
-
-
+"""
 def pregunta_04():
     """
     La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la cantidad de
@@ -93,7 +106,9 @@ def pregunta_04():
     ]
 
     """
-    return
+    meses = [z[2].split("-")[1] for z in tabla[0:]]
+    contarmonth = Counter(meses).most_common(12)
+    return sorted(contarmonth, reverse= False)
 
 
 def pregunta_05():
