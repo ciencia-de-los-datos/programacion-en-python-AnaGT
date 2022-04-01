@@ -13,8 +13,6 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 import csv
 from collections import Counter
-from datetime import datetime, date, timedelta
-import time
 with open("data.csv", newline="") as BD:
     datos = csv.reader(BD, delimiter="\t")
     tabla = list(datos)
@@ -124,9 +122,37 @@ def pregunta_05():
         ("D", 8, 3),
         ("E", 9, 1),
     ]
-
+   
+   
     """
-    return
+    A_max= max([z[0:2] for z in tabla if z[0]=='A'])
+    A_min= min([z[0:2] for z in tabla if z[0]=='A'])
+    B_max= max([z[0:2] for z in tabla if z[0]=='B'])
+    B_min= min([z[0:2] for z in tabla if z[0]=='B'])
+    C_max= max([z[0:2] for z in tabla if z[0]=='C'])
+    C_min= min([z[0:2] for z in tabla if z[0]=='C'])
+    D_max= max([z[0:2] for z in tabla if z[0]=='D'])
+    D_min= min([z[0:2] for z in tabla if z[0]=='D'])
+    E_max= max([z[0:2] for z in tabla if z[0]=='E'])
+    E_min= min([z[0:2] for z in tabla if z[0]=='E'])
+    listA=[]
+    listB=[]
+    listC=[]
+    listD=[]
+    listE=[]
+    for z in tabla:
+      if z[0]=='A':
+        listA= A_max[0], A_max[1], A_min[1]
+      if z[0]=='A':
+        listB= B_max[0], B_max[1], B_min[1]
+      if z[0]=='A':
+        listC= C_max[0], C_max[1], C_min[1]
+      if z[0]=='A':
+        listD= D_max[0], D_max[1], D_min[1]
+      if z[0]=='A':
+        listE= E_max[0], E_max[1], E_min[1]
+        letras= [listA,listB,listC,listD,listE]
+        return letras
 
 
 def pregunta_06():
