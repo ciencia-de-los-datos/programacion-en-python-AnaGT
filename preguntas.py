@@ -141,18 +141,18 @@ def pregunta_05():
     listD=[]
     listE=[]
     for z in tabla:
-      if z[0]=='A':
-        listA= A_max[0], A_max[1], A_min[1]
-      if z[0]=='A':
-        listB= B_max[0], B_max[1], B_min[1]
-      if z[0]=='A':
-        listC= C_max[0], C_max[1], C_min[1]
-      if z[0]=='A':
-        listD= D_max[0], D_max[1], D_min[1]
-      if z[0]=='A':
-        listE= E_max[0], E_max[1], E_min[1]
-        letras= [listA,listB,listC,listD,listE]
-        return letras
+     if z[0]=='A':
+       listA= A_max[0], int(A_max[1]), int(A_min[1])
+     if z[0]=='A':
+       listB= B_max[0],int(B_max[1]), int(B_min[1])
+     if z[0]=='A':
+       listC= C_max[0], int(C_max[1]), int(C_min[1])
+     if z[0]=='A':
+       listD= D_max[0], int(D_max[1]), int(D_min[1])
+     if z[0]=='A':
+       listE= E_max[0], int(E_max[1]), int(E_min[1])
+       letras= [listA,listB,listC,listD,listE]
+       return letras
 
 
 def pregunta_06():
