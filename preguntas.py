@@ -178,16 +178,16 @@ def pregunta_07():
     ]
 
     """
-    val0= [z[0] for z in tabla if z[1]=='0']
-    val1= [z[0] for z in tabla if z[1]=='1']
-    val2= [z[0] for z in tabla if z[1]=='2']
-    val3= [z[0] for z in tabla if z[1]=='3']
-    val4= [z[0] for z in tabla if z[1]=='4']
-    val5= [z[0] for z in tabla if z[1]=='5']
-    val6= [z[0] for z in tabla if z[1]=='6']
-    val7= [z[0] for z in tabla if z[1]=='7']
-    val8= [z[0] for z in tabla if z[1]=='8']
-    val9= [z[0] for z in tabla if z[1]=='9']
+    val0= [z[0] for z in tabla if z[1]==0]
+    val1= [z[0] for z in tabla if z[1]==1]
+    val2= [z[0] for z in tabla if z[1]==2]
+    val3= [z[0] for z in tabla if z[1]==3]
+    val4= [z[0] for z in tabla if z[1]==4]
+    val5= [z[0] for z in tabla if z[1]==5]
+    val6= [z[0] for z in tabla if z[1]==6]
+    val7= [z[0] for z in tabla if z[1]==7]
+    val8= [z[0] for z in tabla if z[1]==8]
+    val9= [z[0] for z in tabla if z[1]==9]
     resultado = [(0, val0), (1,val1),(2, val2), (3,val3),(4,val4), (5, val5), (6,val6),(7, val7), (8,val8),(9,val9)]
     return resultado
     
