@@ -3,7 +3,6 @@ Laboratorio de Programación Básica en Python para Manejo de Datos
 -----------------------------------------------------------------------------------------
 
 Este archivo contiene las preguntas que se van a realizar en el laboratorio.
-
 No puede utilizar pandas, numpy o scipy. Se debe utilizar solo las funciones de python
 básicas.
 
@@ -16,6 +15,7 @@ from collections import Counter
 with open("data.csv", newline="") as BD:
     datos = csv.reader(BD, delimiter="\t")
     tabla = list(datos)
+    tabla = [[row[0]]+ [int(row[1])]+ row[2:] for row in tabla]
 
 
 def pregunta_01():
@@ -28,7 +28,7 @@ def pregunta_01():
     """
     suma = 0
     for num in tabla:
-        suma += int(num[1])
+        suma += (num[1])
     return suma
 
 
@@ -53,22 +53,18 @@ def pregunta_02():
     return sorted(lista2, reverse= False)
 
 def pregunta_03():
-  diccionario = {}
-  diccionario = {"A": 0, "B": 0, "C": 0,"D": 0, "E": 0}
-  for row in tabla:
-    sumatoria= row[1]
-    if row[0]== "A":
-      diccionario["A"]+= int(sumatoria)
-    if row[0]== "B":
-      diccionario["B"]+= int(sumatoria)
-    if row[0]== "C":
-      diccionario["C"]+= int(sumatoria)
-    if row[0]== "D":
-      diccionario["D"]+= int(sumatoria)
-    if row[0]== "E":
-      diccionario["E"]+= int(sumatoria)
-  return list(diccionario.items()) 
-"""
+    lisletras=[]
+    lisfinal= []
+    for a in tabla:
+        lisletras.append(a[0])
+    for b in set(lisletras):
+        counter= 0
+        for lista in tabla:
+            if lista[0]==b:
+                counter=counter+lista[1]
+        lisfinal.append((b,counter))
+    return sorted(lisfinal)
+    """ 
     Retorne la suma de la columna 2 por cada letra de la primera columna como una lista
     de tuplas (letra, suma) ordendas alfabeticamente.
 
@@ -81,7 +77,7 @@ def pregunta_03():
         ("E", 67),
     ]
 
-"""
+    """
 def pregunta_04():
     """
     La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la cantidad de
@@ -125,34 +121,15 @@ def pregunta_05():
    
    
     """
-    A_max= max([z[0:2] for z in tabla if z[0]=='A'])
-    A_min= min([z[0:2] for z in tabla if z[0]=='A'])
-    B_max= max([z[0:2] for z in tabla if z[0]=='B'])
-    B_min= min([z[0:2] for z in tabla if z[0]=='B'])
-    C_max= max([z[0:2] for z in tabla if z[0]=='C'])
-    C_min= min([z[0:2] for z in tabla if z[0]=='C'])
-    D_max= max([z[0:2] for z in tabla if z[0]=='D'])
-    D_min= min([z[0:2] for z in tabla if z[0]=='D'])
-    E_max= max([z[0:2] for z in tabla if z[0]=='E'])
-    E_min= min([z[0:2] for z in tabla if z[0]=='E'])
-    listA=[]
-    listB=[]
-    listC=[]
-    listD=[]
-    listE=[]
-    for z in tabla:
-     if z[0]=='A':
-       listA= A_max[0], int(A_max[1]), int(A_min[1])
-     if z[0]=='A':
-       listB= B_max[0],int(B_max[1]), int(B_min[1])
-     if z[0]=='A':
-       listC= C_max[0], int(C_max[1]), int(C_min[1])
-     if z[0]=='A':
-       listD= D_max[0], int(D_max[1]), int(D_min[1])
-     if z[0]=='A':
-       listE= E_max[0], int(E_max[1]), int(E_min[1])
-       letras= [listA,listB,listC,listD,listE]
-       return letras
+    lisletras= []
+    lisfinal= []
+    for a in tabla:
+        lisletras.append(a[0])
+    for letra in set(lisletras):
+        maximo= max([z[1]for z in tabla if z[0]==letra[0]])
+        minimo= min([z[1]for z in tabla if z[0]==letra[0]])
+        lisfinal.append((letra,maximo,minimo))
+    return sorted(lisfinal)
 
 
 def pregunta_06():
@@ -238,7 +215,18 @@ def pregunta_08():
     ]
 
     """
-    return
+    val0= set([z[0] for z in tabla if z[1]== 0])
+    val1= set([z[0] for z in tabla if z[1]== 1])
+    val2= set([z[0] for z in tabla if z[1]== 2])
+    val3= set([z[0] for z in tabla if z[1]== 3])
+    val4= set([z[0] for z in tabla if z[1]== 4])
+    val5= set([z[0] for z in tabla if z[1]== 5])
+    val6= set([z[0] for z in tabla if z[1]== 6])
+    val7= set([z[0] for z in tabla if z[1]== 7])
+    val8= set([z[0] for z in tabla if z[1]== 8])
+    val9= set([z[0] for z in tabla if z[1]== 9])
+    resultado = [(0, list(sorted(val0))),(1,list(sorted(val1))),(2,list(sorted(val2))), (3,list(sorted(val3))),(4,list(sorted(val4))), (5, list(sorted(val5))), (6,list(sorted(val6))),(7, list(sorted(sorted(val7)))),(8,list(sorted(val8))),(9,list(sorted(val9)))]
+    return resultado
 
 
 def pregunta_09():
