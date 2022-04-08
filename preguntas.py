@@ -133,6 +133,23 @@ def pregunta_05():
 
 
 def pregunta_06():
+    info=open('data.csv', 'r').readlines()
+    info = [row[0:-1] for row in info]
+    info = [row.split('\t') for row in info]
+    info= [row[4].split(',')for row in info]
+    lisfinal = []
+    for lista in info:
+        info = [row.split(':') for row in lista]
+        lisfinal+=info
+        claves=[]
+        for a in lisfinal:
+            claves.append(a[0])
+            lisunica=list(set(claves))
+        lisre=[]
+        for clave in lisunica:
+            valores= [int(row[1]) for row in lisfinal if row[0][0:3]==clave[:]]
+            lisre.append((clave,min(valores),max(valores)))
+    return sorted(lisre)
     """
     La columna 5 codifica un diccionario donde cada cadena de tres letras corresponde a
     una clave y el valor despues del caracter `:` corresponde al valor asociado a la
@@ -154,8 +171,6 @@ def pregunta_06():
     ]
 
     """
-    return
-
 
 def pregunta_07():
     """
@@ -230,6 +245,20 @@ def pregunta_08():
 
 
 def pregunta_09():
+    info=open('data.csv', 'r').readlines()
+    info = [row[0:-1] for row in info]
+    info = [row.split('\t') for row in info]
+    info= [row[4].split(',')for row in info]
+    lisfinal = []
+    for lista in info:
+        info = [row.split(':') for row in lista]
+        lisfinal+=info
+        claves=[]
+        for a in lisfinal:
+            claves.append(a[0])
+        clavesval = Counter(claves).most_common(10)
+        resultado=sorted(clavesval, reverse= False)
+    return dict(resultado)
     """
     Retorne un diccionario que contenga la cantidad de registros en que aparece cada
     clave de la columna 5.
@@ -249,8 +278,6 @@ def pregunta_09():
     }
 
     """
-    return
-
 
 def pregunta_10():
     """
