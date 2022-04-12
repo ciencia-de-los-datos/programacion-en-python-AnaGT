@@ -280,6 +280,15 @@ def pregunta_09():
     """
 
 def pregunta_10():
+    lisfinal= []
+    for z in tabla:
+        col1 = z[0]
+        col4=[z[3].split(",")]
+        long4= len(col4[0])
+        col5=[z[4].split(",")]
+        long5= len(col5[0])
+        lisfinal.append((col1,long4,long5)) 
+    return lisfinal
     """
     Retorne una lista de tuplas contengan por cada tupla, la letra de la columna 1 y la
     cantidad de elementos de las columnas 4 y 5.
@@ -301,6 +310,25 @@ def pregunta_10():
 
 
 def pregunta_11():
+    liscol4= []
+    for z in tabla:
+        col4=[z[3].split(",")]
+        letras= col4[0]
+        liscol4+= letras
+    listaletras=list(set(liscol4))
+    listaletras.sort()
+    columna1y3=[(z[3].split(','),z[1]) for z in tabla]
+    diccionario={}
+    for clave in listaletras:
+        suma=0
+        for element in columna1y3:
+            for letra in element[0]:
+                if letra == clave:
+                    suma=suma+ element[1]
+        dic={clave:suma}
+        diccionario.update(dic)
+    return diccionario
+
     """
     Retorne un diccionario que contengan la suma de la columna 2 para cada letra de la
     columna 4, ordenadas alfabeticamente.
@@ -322,6 +350,34 @@ def pregunta_11():
 
 
 def pregunta_12():
+    info=open('data.csv', 'r').readlines()
+    info = [row[0:-1] for row in info]
+    info = [row.split('\t') for row in info]
+    info= [row[4].split(',')for row in info]
+    lisfinal = []
+    listasumas=[]
+    col1 = [row[0] for row in tabla]
+    for lista in info:
+        info = [row.split(':') for row in lista]
+        total=[]
+        for a in info:
+            val= a[1:]
+            total+=val
+        valores= [int(row) for row in total]
+        val=sum(valores)
+        listasumas.append(val)
+    grupos=sorted(list(zip(col1,listasumas)))
+    lisletras=[]
+    lisfinal= []
+    for a in tabla:
+        lisletras.append(a[0])
+    for letra in set(lisletras):
+        counter= 0
+        for lista in grupos:
+            if lista[0]==letra:
+                counter=counter+lista[1]
+        lisfinal.append((letra,counter))
+    return dict(lisfinal)
     """
     Genere un diccionario que contengan como clave la columna 1 y como valor la suma de
     los valores de la columna 5 sobre todo el archivo.
