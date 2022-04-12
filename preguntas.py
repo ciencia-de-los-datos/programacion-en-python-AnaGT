@@ -3,7 +3,6 @@ Laboratorio de Programación Básica en Python para Manejo de Datos
 -----------------------------------------------------------------------------------------
 
 Este archivo contiene las preguntas que se van a realizar en el laboratorio.
-
 No puede utilizar pandas, numpy o scipy. Se debe utilizar solo las funciones de python
 básicas.
 
@@ -11,6 +10,12 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+import csv
+from collections import Counter
+with open("data.csv", newline="") as BD:
+    datos = csv.reader(BD, delimiter="\t")
+    tabla = list(datos)
+    tabla = [[row[0]]+ [int(row[1])]+ row[2:] for row in tabla]
 
 
 def pregunta_01():
@@ -21,7 +26,10 @@ def pregunta_01():
     214
 
     """
-    return
+    suma = 0
+    for num in tabla:
+        suma += (num[1])
+    return suma
 
 
 def pregunta_02():
@@ -39,11 +47,24 @@ def pregunta_02():
     ]
 
     """
-    return
-
+    lista_letras=[z[0] for z in tabla[0:]]
+    lista2 = Counter(lista_letras).most_common(5)
+    
+    return sorted(lista2, reverse= False)
 
 def pregunta_03():
-    """
+    lisletras=[]
+    lisfinal= []
+    for a in tabla:
+        lisletras.append(a[0])
+    for b in set(lisletras):
+        counter= 0
+        for lista in tabla:
+            if lista[0]==b:
+                counter=counter+lista[1]
+        lisfinal.append((b,counter))
+    return sorted(lisfinal)
+    """ 
     Retorne la suma de la columna 2 por cada letra de la primera columna como una lista
     de tuplas (letra, suma) ordendas alfabeticamente.
 
@@ -57,9 +78,6 @@ def pregunta_03():
     ]
 
     """
-    return
-
-
 def pregunta_04():
     """
     La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la cantidad de
@@ -82,7 +100,9 @@ def pregunta_04():
     ]
 
     """
-    return
+    meses = [z[2].split("-")[1] for z in tabla[0:]]
+    contarmonth = Counter(meses).most_common(12)
+    return sorted(contarmonth, reverse= False)
 
 
 def pregunta_05():
@@ -98,12 +118,38 @@ def pregunta_05():
         ("D", 8, 3),
         ("E", 9, 1),
     ]
-
+   
+   
     """
-    return
+    lisletras= []
+    lisfinal= []
+    for a in tabla:
+        lisletras.append(a[0])
+    for letra in set(lisletras):
+        maximo= max([z[1]for z in tabla if z[0]==letra[0]])
+        minimo= min([z[1]for z in tabla if z[0]==letra[0]])
+        lisfinal.append((letra,maximo,minimo))
+    return sorted(lisfinal)
 
 
 def pregunta_06():
+    info=open('data.csv', 'r').readlines()
+    info = [row[0:-1] for row in info]
+    info = [row.split('\t') for row in info]
+    info= [row[4].split(',')for row in info]
+    lisfinal = []
+    for lista in info:
+        info = [row.split(':') for row in lista]
+        lisfinal+=info
+        claves=[]
+        for a in lisfinal:
+            claves.append(a[0])
+            lisunica=list(set(claves))
+        lisre=[]
+        for clave in lisunica:
+            valores= [int(row[1]) for row in lisfinal if row[0][0:3]==clave[:]]
+            lisre.append((clave,min(valores),max(valores)))
+    return sorted(lisre)
     """
     La columna 5 codifica un diccionario donde cada cadena de tres letras corresponde a
     una clave y el valor despues del caracter `:` corresponde al valor asociado a la
@@ -125,8 +171,6 @@ def pregunta_06():
     ]
 
     """
-    return
-
 
 def pregunta_07():
     """
@@ -149,7 +193,19 @@ def pregunta_07():
     ]
 
     """
-    return
+    val0= [z[0] for z in tabla if z[1]==0]
+    val1= [z[0] for z in tabla if z[1]==1]
+    val2= [z[0] for z in tabla if z[1]==2]
+    val3= [z[0] for z in tabla if z[1]==3]
+    val4= [z[0] for z in tabla if z[1]==4]
+    val5= [z[0] for z in tabla if z[1]==5]
+    val6= [z[0] for z in tabla if z[1]==6]
+    val7= [z[0] for z in tabla if z[1]==7]
+    val8= [z[0] for z in tabla if z[1]==8]
+    val9= [z[0] for z in tabla if z[1]==9]
+    resultado = [(0, val0), (1,val1),(2, val2), (3,val3),(4,val4), (5, val5), (6,val6),(7, val7), (8,val8),(9,val9)]
+    return resultado
+    
 
 
 def pregunta_08():
@@ -174,10 +230,35 @@ def pregunta_08():
     ]
 
     """
-    return
+    val0= set([z[0] for z in tabla if z[1]== 0])
+    val1= set([z[0] for z in tabla if z[1]== 1])
+    val2= set([z[0] for z in tabla if z[1]== 2])
+    val3= set([z[0] for z in tabla if z[1]== 3])
+    val4= set([z[0] for z in tabla if z[1]== 4])
+    val5= set([z[0] for z in tabla if z[1]== 5])
+    val6= set([z[0] for z in tabla if z[1]== 6])
+    val7= set([z[0] for z in tabla if z[1]== 7])
+    val8= set([z[0] for z in tabla if z[1]== 8])
+    val9= set([z[0] for z in tabla if z[1]== 9])
+    resultado = [(0, list(sorted(val0))),(1,list(sorted(val1))),(2,list(sorted(val2))), (3,list(sorted(val3))),(4,list(sorted(val4))), (5, list(sorted(val5))), (6,list(sorted(val6))),(7, list(sorted(sorted(val7)))),(8,list(sorted(val8))),(9,list(sorted(val9)))]
+    return resultado
 
 
 def pregunta_09():
+    info=open('data.csv', 'r').readlines()
+    info = [row[0:-1] for row in info]
+    info = [row.split('\t') for row in info]
+    info= [row[4].split(',')for row in info]
+    lisfinal = []
+    for lista in info:
+        info = [row.split(':') for row in lista]
+        lisfinal+=info
+        claves=[]
+        for a in lisfinal:
+            claves.append(a[0])
+        clavesval = Counter(claves).most_common(10)
+        resultado=sorted(clavesval, reverse= False)
+    return dict(resultado)
     """
     Retorne un diccionario que contenga la cantidad de registros en que aparece cada
     clave de la columna 5.
@@ -197,10 +278,17 @@ def pregunta_09():
     }
 
     """
-    return
-
 
 def pregunta_10():
+    lisfinal= []
+    for z in tabla:
+        col1 = z[0]
+        col4=[z[3].split(",")]
+        long4= len(col4[0])
+        col5=[z[4].split(",")]
+        long5= len(col5[0])
+        lisfinal.append((col1,long4,long5)) 
+    return lisfinal
     """
     Retorne una lista de tuplas contengan por cada tupla, la letra de la columna 1 y la
     cantidad de elementos de las columnas 4 y 5.
@@ -222,6 +310,25 @@ def pregunta_10():
 
 
 def pregunta_11():
+    liscol4= []
+    for z in tabla:
+        col4=[z[3].split(",")]
+        letras= col4[0]
+        liscol4+= letras
+    listaletras=list(set(liscol4))
+    listaletras.sort()
+    columna1y3=[(z[3].split(','),z[1]) for z in tabla]
+    diccionario={}
+    for clave in listaletras:
+        suma=0
+        for element in columna1y3:
+            for letra in element[0]:
+                if letra == clave:
+                    suma=suma+ element[1]
+        dic={clave:suma}
+        diccionario.update(dic)
+    return diccionario
+
     """
     Retorne un diccionario que contengan la suma de la columna 2 para cada letra de la
     columna 4, ordenadas alfabeticamente.
@@ -243,6 +350,34 @@ def pregunta_11():
 
 
 def pregunta_12():
+    info=open('data.csv', 'r').readlines()
+    info = [row[0:-1] for row in info]
+    info = [row.split('\t') for row in info]
+    info= [row[4].split(',')for row in info]
+    lisfinal = []
+    listasumas=[]
+    col1 = [row[0] for row in tabla]
+    for lista in info:
+        info = [row.split(':') for row in lista]
+        total=[]
+        for a in info:
+            val= a[1:]
+            total+=val
+        valores= [int(row) for row in total]
+        val=sum(valores)
+        listasumas.append(val)
+    grupos=sorted(list(zip(col1,listasumas)))
+    lisletras=[]
+    lisfinal= []
+    for a in tabla:
+        lisletras.append(a[0])
+    for letra in set(lisletras):
+        counter= 0
+        for lista in grupos:
+            if lista[0]==letra:
+                counter=counter+lista[1]
+        lisfinal.append((letra,counter))
+    return dict(lisfinal)
     """
     Genere un diccionario que contengan como clave la columna 1 y como valor la suma de
     los valores de la columna 5 sobre todo el archivo.
